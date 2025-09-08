@@ -14,14 +14,16 @@
     "生物学原理",
     "大学化学",
     "SUSTech English III",
-    "EAP",
     "Java程序设计基础",
     "C程序设计基础",
     "Python程序设计基础",
     "Matlab程序设计基础",
     "线性代数",
     "高等数学（上）",
-    "普通物理学（上）"
+    "高等数学（下）",
+    "普通物理学（上）",
+    "普通物理学（下）",
+    "大学地球科学"
   ]);
   const {open, send} = XMLHttpRequest.prototype;
 
@@ -31,7 +33,7 @@
   };
 
   XMLHttpRequest.prototype.send = function(data) {
-    if (this._url === '/Xsxk/queryKxrw') {
+    if (this._url === '/Xsxk/queryKxrw' || this._url === '/Xsxktz/queryRwxxcxList') {
       if (data) {
         const params = new URLSearchParams(data);
         params.set('pageSize', '1000');
@@ -41,7 +43,8 @@
         if (this.readyState === 4) {
           try {
             const response = JSON.parse(this.response);
-            response.kxrwList.list = response.kxrwList.list.filter(course => !(keywordSet.has(course.kcdm) || keywordSet.has(course.kcmc) || keywordSet.has(course.kcmc_en)));
+            if (this._url === '/Xsxk/queryKxrw') response.kxrwList.list = response.kxrwList.list.filter(course => !(keywordSet.has(course.kcdm) || keywordSet.has(course.kcmc) || keywordSet.has(course.kcmc_en)));
+            else response.rwList.list = response.rwList.list.filter(course => !(keywordSet.has(course.kcdm) || keywordSet.has(course.kcmc) || keywordSet.has(course.kcmc_en)));
             Object.defineProperties(this, {response: {value: JSON.stringify(response)}, responseText: {value: JSON.stringify(response)}});
           } catch(e) {}
         }
