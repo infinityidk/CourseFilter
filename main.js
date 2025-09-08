@@ -2,7 +2,7 @@
 // @name        Course Filter 
 // @match       https://tis.sustech.edu.cn/Xsxk*
 // @run-at      document-start
-// @version     0.1
+// @version     0.2
 // @author      infinityidk
 // ==/UserScript==
 
